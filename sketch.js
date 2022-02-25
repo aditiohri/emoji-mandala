@@ -4,24 +4,23 @@
 let symmetry = 6;
 
 let angle = 360 / symmetry;
-let saveButton, clearButton, mouseButton, keyboardButton;
-let slider, lineColorPicker, bgColorPicker;
+let bgColorButton, bgColorPicker, saveButton, clearButton, mouseButton, keyboardButton, buttonParent, slider, brushSizeSlider, brushColorPicker, lineColorPicker;
 
 window.setup = () => {
-  createCanvas(710, 710);
-  lineColorPicker = createColorPicker('#b1b');
-  lineColorPicker.position(435, height + 8);
-  bgColorPicker = createColorPicker('#fff');
-  bgColorPicker.position(0, height + 8);
-  angleMode(DEGREES);
-  background(bgColorPicker.color());
+    createCanvas(window.outerHeight, window.innerHeight - 200)
+    angleMode(DEGREES);
+    
+  bgColorButton = createButton('Choose Background Color')
+  bgColorPicker = createColorPicker('#faf');
+  
+  background(bgColorPicker.color())
   
   // Creating the save button for the file
   saveButton = createButton("save");
   saveButton.mousePressed(saveFile);
   
   // Creating the clear screen button
-  clearButton = createButton("clear");
+  clearButton = createButton("Reset");
   clearButton.mousePressed(clearScreen);
   
   // Creating the button for Full Screen
@@ -31,6 +30,10 @@ window.setup = () => {
   // Setting up the slider for the thickness of the brush
   brushSizeSlider = createButton("Brush Size Slider");
   sizeSlider = createSlider(1, 32, 4, 0.1);
+
+  brushColorPicker = createButton('Brush Color Picker')
+  lineColorPicker = createColorPicker('#b1b');
+
 }
 
 // Save File Function
@@ -59,12 +62,11 @@ window.draw = () => {
     let pmy = pmouseY - height / 2;
 
     if (mouseIsPressed) {
-      for (let i = 0; i < symmetry; i++) {
+        for (let i = 0; i < symmetry; i++) {
         rotate(angle);
         let sw = sizeSlider.value();
         strokeWeight(sw);
         stroke(lineColorPicker.color())
-        // text('🤨')
         line(mx, my, pmx, pmy);
         push();
         scale(1, -1);
