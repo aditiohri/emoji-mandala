@@ -73,17 +73,18 @@ window.draw = () => {
     if (mouseIsPressed) {
       for (let i = 0; i < symmetry; i++) {
         rotate(angle);
-        let sw = sizeSlider.value();
-        strokeWeight(sw);
-        stroke(lineColorPicker.color());
-        line(mx, my, pmx, pmy);
         if (emoji) {
-          text(emoji, mx, my);
+            text(emoji, mx, my);
+        } else {
+            let sw = sizeSlider.value();
+            strokeWeight(sw);
+            stroke(lineColorPicker.color());
+            line(mx, my, pmx, pmy);
+            push();
+            scale(1, -1);
+            line(mx, my, pmx, pmy);
+            pop();
         }
-        push();
-        scale(1, -1);
-        line(mx, my, pmx, pmy);
-        pop();
       }
     }
   }
