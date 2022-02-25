@@ -18,14 +18,22 @@
         top: 2%;
         left: 20%;
       }
+      emoji-picker {
+          position: absolute;
+          top: 2%;
+          right: 100%;
+      }
   </style>
   <body>
     <main></main>
-    <!-- <emoji-picker></emoji-picker> -->
+    <emoji-picker></emoji-picker>
   </body>
-  <!-- <script>
+  <script>
     document
       .querySelector("emoji-picker")
-      .addEventListener("emoji-click", (event) => console.log(event.detail));
-  </script> -->
+      .addEventListener("emoji-click", (event) => {
+          emoji = event.detail.emoji.unicode
+          console.log(emoji)
+        });
+  </script>
 </html>
